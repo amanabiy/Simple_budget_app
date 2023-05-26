@@ -91,13 +91,13 @@ describe('BudgetTracker', () => {
     expect(wrapper.vm.errorMessage).toBe('You have used up 50% of your entire budget for the week!');
   });
   
-  it('displays 25% budget used error message when 25% of the budget is used', async () => {
+  it('displays 75% budget used error message when 75% of the budget is used', async () => {
     wrapper.setData({ budget: 100 });
     await wrapper.vm.$nextTick();
     wrapper.find('#expense-name').setValue('Expense 1');
     wrapper.find('#expense-amount').setValue(75);
     wrapper.find('form').trigger('submit');
-    expect(wrapper.vm.errorMessage).toBe('You have used up 25% of your entire budget for the week!');
+    expect(wrapper.vm.errorMessage).toBe('You have used up 75% of your entire budget for the week!');
   });
   
   it('validates the form and returns true if all inputs are valid', () => {
@@ -166,10 +166,10 @@ describe('BudgetTracker', () => {
     expect(wrapper.vm.errorMessage).toBe('You have used up 50% of your entire budget for the week!');
   });
 
-  it('updates the budget and sets the error message when budget is exceeded (25% used)', () => {
+  it('updates the budget and sets the error message when budget is exceeded (75% used)', () => {
     wrapper.setData({ budget: 100, expenseList: [{ name: 'Groceries', amount: 75 }] });
     wrapper.vm.updateBudget();
-    expect(wrapper.vm.errorMessage).toBe('You have used up 25% of your entire budget for the week!');
+    expect(wrapper.vm.errorMessage).toBe('You have used up 75% of your entire budget for the week!');
   });
 
   it('updates the budget and clears the error message when budget is not exceeded', () => {
